@@ -14,10 +14,36 @@ public class BaseDeDonneesTests {
     @MockBean
     private VoitureRepository voitureRepository;
 
+
     @Test
-    void uneVoiture(){
-        // tester les méthodes de l'interface CrudRepository qui permette d'accéder à la base de données: https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/CrudRepository.html
-        // save, find, delete...
+    void enregistrerVoiture(){
+        Voiture voiture = new Voiture(1, "Dodoche", 5);
+        when(voitureRepository.save(voiture)).thenReturn(voiture);
+    }
+
+    @Test
+    void findVoiture(){
+        Voiture voiture = new Voiture(2, "Dodoche", 5);
+        when(voitureRepository.findById(3)).thenReturn(java.util.Optional.of(voiture));
+    }
+
+    @Test
+    void findAllVoiture(){
+        Voiture voiture = new Voiture(3, "Dodoche", 5);
+        when(voitureRepository.findAll()).thenReturn(Collections.singletonList(voiture));
+    }
+
+    @Test
+    void updateVoiture(){
+        Voiture voiture = new Voiture(4, "Dodoche", 5);
+        when(voitureRepository.save(voiture)).thenReturn(voiture);
+    }
+
+    @Test
+    void supprimerVoiture(){
+        Voiture voiture = new Voiture(5, "Dodoche", 5);
+        voitureRepository.deleteById(5);
+        when(voitureRepository.findById(5)).thenReturn(java.util.Optional.empty());
     }
 
 }
